@@ -14,12 +14,24 @@ jobs:
         with:
           repository: Microsoft/vcpkg
           path: '.\vcpkg'
+
       - name: Bootstrap vcpkg
         working-directory: '.\vcpkg'
         run: '.\bootstrap-vcpkg.bat'
+        
       - name: Install curl
         working-directory: '.\vcpkg'
         run: '.\vcpkg install curl:x86-windows curl:x64-windows'
+        
       - name: Export curl
         working-directory: '.\vcpkg'
         run: '.\vcpkg export curl:x86-windows curl:x64-windows --nuget'
+        
+      - name: Prepare artifact directory
+        run: 'md vcpkg-artifact; Move-Item -Path vcpkg\*.nupkg -Destination vcpkg-artifact\libcurl.1.0.0.nupkg'
+        
+      - name: Upload artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: 'libcurl.1.0.0.nupkg'
+          path: '.\vcpkg-artifact'
