@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NCurly", "NCurly\NCurly.csproj", "{F692CBAF-6233-4E15-83FE-4A759D9DF2C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A8CA99C6-B1B9-4145-8ABE-D96887E30886}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{20497F53-295A-469E-9965-1F707E6094F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NCurly.Tests", "..\tests\NCurly.Tests\NCurly.Tests.csproj", "{FF04F82F-69DD-4D55-B5BF-71E561E504FF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F692CBAF-6233-4E15-83FE-4A759D9DF2C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F692CBAF-6233-4E15-83FE-4A759D9DF2C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F692CBAF-6233-4E15-83FE-4A759D9DF2C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F692CBAF-6233-4E15-83FE-4A759D9DF2C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF04F82F-69DD-4D55-B5BF-71E561E504FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF04F82F-69DD-4D55-B5BF-71E561E504FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF04F82F-69DD-4D55-B5BF-71E561E504FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF04F82F-69DD-4D55-B5BF-71E561E504FF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F692CBAF-6233-4E15-83FE-4A759D9DF2C2} = {A8CA99C6-B1B9-4145-8ABE-D96887E30886}
+		{FF04F82F-69DD-4D55-B5BF-71E561E504FF} = {20497F53-295A-469E-9965-1F707E6094F4}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <Version>0.0.1-alpha</Version>
+        <Authors>withkittens</Authors>
+        <Description>libcurl bindings for .NET Core.</Description>
+        <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+        <PackageProjectUrl>https://github.com/withkittens/NCurly</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/withkittens/NCurly</RepositoryUrl>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="..\..\LICENSE.md" Pack="true" PackagePath="$(PackageLicenseFile)" />
+    </ItemGroup>
+
+</Project>
