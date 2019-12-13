@@ -8,6 +8,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{20497F53
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NCurly.Tests", "..\tests\NCurly.Tests\NCurly.Tests.csproj", "{FF04F82F-69DD-4D55-B5BF-71E561E504FF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NCurly.Samples", "..\samples\NCurly.Samples\NCurly.Samples.csproj", "{918D8299-31C0-44F0-9C18-F30B3F49424F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,6 +24,10 @@ Global
 		{FF04F82F-69DD-4D55-B5BF-71E561E504FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF04F82F-69DD-4D55-B5BF-71E561E504FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF04F82F-69DD-4D55-B5BF-71E561E504FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{918D8299-31C0-44F0-9C18-F30B3F49424F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{918D8299-31C0-44F0-9C18-F30B3F49424F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{918D8299-31C0-44F0-9C18-F30B3F49424F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{918D8299-31C0-44F0-9C18-F30B3F49424F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F692CBAF-6233-4E15-83FE-4A759D9DF2C2} = {A8CA99C6-B1B9-4145-8ABE-D96887E30886}

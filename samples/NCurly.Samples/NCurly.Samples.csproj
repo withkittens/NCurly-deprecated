@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>netcoreapp3.0</TargetFramework>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <RestoreSources>$(RestoreSources);..\..\src\NCurly\bin\$(Configuration);https://api.nuget.org/v3/index.json</RestoreSources>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="NCurly" Version="0.0.1-alpha-2" />
+    </ItemGroup>
+
+</Project>

@@ -6,16 +6,27 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <Version>0.0.1-alpha</Version>
-        <Authors>withkittens</Authors>
+        <Product>NCurly</Product>
+        <Version>0.0.1-alpha-2</Version>
         <Description>libcurl bindings for .NET Core.</Description>
+        <Authors>withkittens</Authors>
         <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
         <PackageProjectUrl>https://github.com/withkittens/NCurly</PackageProjectUrl>
         <RepositoryUrl>https://github.com/withkittens/NCurly</RepositoryUrl>
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="..\..\LICENSE.md" Pack="true" PackagePath="$(PackageLicenseFile)" />
+        <None Include="..\..\LICENSE.md" Pack="true" PackagePath="$(PackageLicenseFile)" Visible="false" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <!--
+        - Metadata: 
+          https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild-well-known-item-metadata
+        - Native runtime dlls:
+          https://github.com/smkanadl/PInvokeTest/issues/4#issuecomment-427585159
+      -->
+      <Content Include="runtimes/**/*.*" Link="%(Filename)%(Extension)" Pack="true" PackagePath="%(Identity)" Visible="false" />
     </ItemGroup>
 
 </Project>
