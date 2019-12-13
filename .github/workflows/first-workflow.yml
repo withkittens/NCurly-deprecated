@@ -23,15 +23,25 @@ jobs:
         working-directory: '.\vcpkg'
         run: '.\vcpkg install curl:x86-windows curl:x64-windows'
         
-      - name: Export curl
-        working-directory: '.\vcpkg'
-        run: '.\vcpkg export curl:x86-windows curl:x64-windows --nuget'
+      - name: Checkout NCurly
+        uses: actions/checkout@v2
         
-      - name: Prepare artifact directory
-        run: 'md vcpkg-artifact; Move-Item -Path vcpkg\*.nupkg -Destination vcpkg-artifact\libcurl.1.0.0.nupkg'
+      - name: Copy curl binaries
+        run: >-
+          @('x86', 'x64') | foreach {
+            mkdir "runtimes\win-$_\native";
+            cp "vcpkg\installed\$_-windows\bin\*.dll" "runtimes\win-$_\native"
+          }
         
-      - name: Upload artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: 'libcurl.1.0.0.nupkg'
-          path: '.\vcpkg-artifact'
+      #- name: Export curl
+      #  working-directory: '.\vcpkg'
+      #  run: '.\vcpkg export curl:x86-windows curl:x64-windows --nuget'
+      #  
+      #- name: Prepare artifact directory
+      #  run: 'md vcpkg-artifact; Move-Item -Path vcpkg\*.nupkg -Destination vcpkg-artifact\libcurl.1.0.0.nupkg'
+      #  
+      #- name: Upload artifact
+      #  uses: actions/upload-artifact@v1
+      #  with:
+      #    name: 'libcurl.1.0.0.nupkg'
+      #    path: '.\vcpkg-artifact'
