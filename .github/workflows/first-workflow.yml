@@ -1,0 +1,12 @@
+name: First workflow
+
+on:
+  push:
+    tags: [v*]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Hello world
+        run: echo Hello world
