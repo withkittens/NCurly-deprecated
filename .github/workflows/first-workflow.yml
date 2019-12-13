@@ -22,4 +22,4 @@ jobs:
         run: '.\vcpkg install curl:x86-windows curl:x64-windows'
       - name Export curl
         working-directory: '.\vcpkg'
-        run '.\vcpkg export curl:x86-windows curl:x64-windows --nuget'
+        run: '.\vcpkg export curl:x86-windows curl:x64-windows --nuget'
