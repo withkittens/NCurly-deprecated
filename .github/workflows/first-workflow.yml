@@ -15,6 +15,8 @@ jobs:
           repository: Microsoft/vcpkg
           path: '.\vcpkg'
       - name: Bootstrap vcpkg
-        run: 'cd vcpkg; .\bootstrap-vcpkg.bat'
+        working-directory: '.\vcpkg'
+        run: '.\bootstrap-vcpkg.bat'
       - name: Install curl
+        working-directory: '.\vcpkg'
         run: '.\vcpkg install curl:x86-windows curl:x64-windows'
