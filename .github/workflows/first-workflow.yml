@@ -16,6 +16,8 @@ jobs:
       - name: Dump environment variables
         run: 'ls env: | foreach { ''{0}={1}'' -f $_.Key,$_.Value }'
         shell: pwsh
+    
+      - uses: actions/checkout@v2
       
       - uses: actions/cache@v1
         id: vcpkg-installation-root-cache
@@ -27,8 +29,6 @@ jobs:
         
       - run: vcpkg install curl:x86-windows curl:x64-windows
         if: steps.vcpkg-installation-root-cache.outputs.cache-hit != 'true'
-      
-      - uses: actions/checkout@v2
           
       - name: Copy libcurl dlls
         run: |
