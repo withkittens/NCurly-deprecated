@@ -28,6 +28,12 @@ jobs:
           key: ${{ runner.os }}-vcpkg-${{ hashFiles('build/vcpkg-curl-version.ps1') }}
           restore-keys: |
             ${{ runner.os }}-vcpkg-
+            
+      - run: |
+          cd $Env:VCPKG
+          git checkout $Env:VCPKG_CURL_SHA -- ports/curl
+        shell: pwsh
+        # if: steps.vcpkg-installation-root-cache.outputs.cache-hit != 'true'
         
       - run: vcpkg install curl:x86-windows curl:x64-windows
         if: steps.vcpkg-installation-root-cache.outputs.cache-hit != 'true'
