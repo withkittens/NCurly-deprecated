@@ -35,6 +35,8 @@ jobs:
         uses: actions/checkout@v2
         with:
           path: NCurly
+          
+      - run: ls . -Recurse | Select Path | Format-List
         
       - name: Copy curl binaries
         run: >-
