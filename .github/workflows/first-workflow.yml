@@ -21,7 +21,7 @@ jobs:
         id: vcpkg-installation-root-cache
         with:
           path: ${{ env.VCPKG }}/installed
-          key: ${{ runner.os }}-vcpkg-${{ hashFiles(${{ env.VCPKG }} + '/ports/curl/CONTROL') }}
+          key: ${{ runner.os }}-vcpkg-${{ hashFiles('build/vcpkg-curl-version.ps1') }}
           restore-keys: |
             ${{ runner.os }}-vcpkg-
         
