@@ -8,9 +8,11 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-    env:
-      VCPKG: ${{ env.VCPKG_INSTALLATION_ROOT }}
     steps:
+      - name: Set environment variables
+        run: echo '::set-env name=VCPKG::$Env:VCPKG_INSTALLATION_ROOT'
+        shell: pwsh
+        
       - name: Dump environment variables
         run: 'ls env: | foreach { ''{0}={1}'' -f $_.Key,$_.Value }'
         shell: pwsh
@@ -32,6 +34,6 @@ jobs:
         run: |
           @('x86', 'x64') | foreach {
             mkdir "runtimes/win-$_/native";
-            cp "$Env:VCPKG_INSTALLATION_ROOT/installed/$_-windows/bin/*.dll" "runtimes/win-$_/native"
+            cp "$Env:VCPKG/installed/$_-windows/bin/*.dll" "runtimes/win-$_/native"
           }
         shell: pwsh
