@@ -10,7 +10,9 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Set environment variables
-        run: echo "::set-env name=VCPKG::$Env:VCPKG_INSTALLATION_ROOT"
+        run: |
+          echo "::set-env name=VCPKG::$Env:VCPKG_INSTALLATION_ROOT"
+          . build/vcpkg-curl-version.ps1
         shell: pwsh
         
       - name: Dump environment variables
