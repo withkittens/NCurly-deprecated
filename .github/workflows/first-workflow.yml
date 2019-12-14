@@ -9,39 +9,57 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: vcpkg > Checkout
+        uses: actions/checkout@v2
         with:
           repository: Microsoft/vcpkg
           path: vcpkg
           
-      - uses: actions/cache@v1
-        id: cache-vcpkg
+      - name: vcpkg > Cache
+        uses: actions/cache@v1
+        id: vcpkg-cache
         with:
-          path: vcpkg/vcpkg.exe
+          path: vcpkg
           key: vcpkg-${{ hashFiles('vcpkg/toolsrc/VERSION.txt') }}
           restore-keys: |
-            vcpkg-      
+            vcpkg-
 
-      - name: Bootstrap vcpkg
-        if: steps.cache-vcpkg.outputs.cache-hit != 'true'
+      - name: vcpkg > Bootstrap
+        if: steps.vcpkg-cache.outputs.cache-hit != 'true'
         working-directory: vcpkg
-        run: ./bootstrap-vcpkg.bat
+        run: ./bootstrap-vcpkg.bat;
         
-      - name: Install curl
+      - name: vcpkg > Install curl
         working-directory: vcpkg
         run: ./vcpkg install curl:x86-windows curl:x64-windows
+      
+      - name: vcpkg > Prepare build logs
+        run: >-
+          mkdir vcpkg-build-logs;
+          cp vcpkg/buildtrees/curl/*.log vcpkg-build-logs
+          
+      - name: vcpkg > Upload build logs
+        uses: actions/upload-artifact@v1
+        with:
+          name: vcpkg-build-logs
+          path: vcpkg-build-logs
         
-      - name: Checkout NCurly
+      - name: NCurly > Checkout
         uses: actions/checkout@v2
         with:
           path: NCurly
           
-      - name: Copy curl binaries
+      - name: NCurly > Copy libcurl dlls
         run: >-
           @('x86', 'x64') | foreach {
             mkdir "NCurly/runtimes/win-$_/native";
             cp "vcpkg/installed/$_-windows/bin/*.dll" "NCurly/runtimes/win-$_/native"
           }
+          
+      - name: vcpkg > Prepare for caching
+        if: steps.vcpkg-cache.outputs.cache-hit != 'true'
+        working-directory: vcpkg
+        run: rm * -Exclude '.vcpkg-root','vcpkg.exe' -Recurse          
         
       #- name: Export curl
       #  working-directory: '.\vcpkg'
