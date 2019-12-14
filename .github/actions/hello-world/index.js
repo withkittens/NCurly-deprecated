@@ -1,6 +1,8 @@
 const { spawnSync } = require('child_process');
+const path = require('path');
 
-const { status, error } = spawnSync('pwsh', ['-File', './index.ps1'], { stdio: 'inherit' });
+const file = path.resolve(__dirname, 'index.ps1');
+const { status, error } = spawnSync('pwsh', ['-File', file], { stdio: 'inherit' });
 
 if (error) {
   throw error;
