@@ -31,6 +31,8 @@ jobs:
             
       - run: |
           cd $Env:VCPKG
+          git rev-parse HEAD
+          git remote -v
           git checkout $Env:VCPKG_CURL_SHA -- ports/curl
         shell: pwsh
         # if: steps.vcpkg-installation-root-cache.outputs.cache-hit != 'true'
