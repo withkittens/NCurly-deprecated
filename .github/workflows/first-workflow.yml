@@ -33,14 +33,14 @@ jobs:
         
       - name: Checkout NCurly
         uses: actions/checkout@v2
-        
-      - run: ls vcpkg/installed -Recurse | select Path | Format-List
+        with:
+          path: NCurly
         
       - name: Copy curl binaries
         run: >-
           @('x86', 'x64') | foreach {
-            mkdir "runtimes/win-$_/native";
-            cp "vcpkg/installed/curl/$_-windows/bin/*.dll" "runtimes/win-$_/native"
+            mkdir "NCurly/runtimes/win-$_/native";
+            cp "vcpkg/installed/curl/$_-windows/bin/*.dll" "NCurly/runtimes/win-$_/native"
           }
         
       #- name: Export curl
