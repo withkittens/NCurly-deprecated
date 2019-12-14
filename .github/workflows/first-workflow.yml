@@ -1,0 +1,49 @@
+name: First workflow
+
+on:
+  push:
+    branches: [actions]
+    tags: [v*]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+        
+      - name: Set environment variables
+        run: |
+          echo "::set-env name=VCPKG::$Env:VCPKG_INSTALLATION_ROOT"
+          . build/vcpkg-curl-version.ps1
+        shell: pwsh
+        
+      - name: Dump environment variables
+        run: 'ls env:'
+        shell: pwsh      
+      
+      - uses: actions/cache@v1
+        id: vcpkg-installation-root-cache
+        with:
+          path: ${{ env.VCPKG }}/installed
+          key: ${{ runner.os }}-vcpkg-${{ hashFiles('build/vcpkg-curl-version.ps1') }}
+          restore-keys: |
+            ${{ runner.os }}-vcpkg-
+            
+      - run: |
+          cd $Env:VCPKG
+          echo "::debug::$(git rev-parse HEAD)"
+          git fetch --unshallow
+          git checkout $Env:VCPKG_CURL_SHA -- ports/curl
+        shell: pwsh
+        # if: steps.vcpkg-installation-root-cache.outputs.cache-hit != 'true'
+        
+      - run: vcpkg install curl:x86-windows curl:x64-windows
+        if: steps.vcpkg-installation-root-cache.outputs.cache-hit != 'true'
+          
+      - name: Copy libcurl dlls
+        run: |
+          @('x86', 'x64') | foreach {
+            mkdir "runtimes/win-$_/native";
+            cp "$Env:VCPKG/installed/$_-windows/bin/*.dll" "runtimes/win-$_/native"
+          }
+        shell: pwsh
