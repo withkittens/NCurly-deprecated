@@ -9,6 +9,8 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
+      - uses: actions/checkout@v2
+        
       - name: Set environment variables
         run: |
           echo "::set-env name=VCPKG::$Env:VCPKG_INSTALLATION_ROOT"
@@ -17,9 +19,7 @@ jobs:
         
       - name: Dump environment variables
         run: 'ls env:'
-        shell: pwsh
-    
-      - uses: actions/checkout@v2
+        shell: pwsh      
       
       - uses: actions/cache@v1
         id: vcpkg-installation-root-cache
