@@ -10,11 +10,11 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Set environment variables
-        run: echo '::set-env name=VCPKG::$Env:VCPKG_INSTALLATION_ROOT'
+        run: echo "::set-env name=VCPKG::$Env:VCPKG_INSTALLATION_ROOT"
         shell: pwsh
         
       - name: Dump environment variables
-        run: 'ls env: | foreach { ''{0}={1}'' -f $_.Key,$_.Value }'
+        run: 'ls env:'
         shell: pwsh
     
       - uses: actions/checkout@v2
