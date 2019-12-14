@@ -36,7 +36,7 @@ jobs:
         with:
           path: NCurly
           
-      - run: ls . -Recurse | Select Path | Format-List
+      - run: ls . -Recurse | Select FullName
         
       - name: Copy curl binaries
         run: >-
