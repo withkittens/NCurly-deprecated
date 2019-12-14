@@ -8,7 +8,10 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-    steps:        
+    steps:
+      - name: Dump environment variables
+        run: 'ls env: | foreach { ''{0}={1}'' -f $_.Key,$_.Value }'
+        
       - run: vcpkg install curl:x86-windows curl:x64-windows
       
       - uses: actions/checkout@v2
