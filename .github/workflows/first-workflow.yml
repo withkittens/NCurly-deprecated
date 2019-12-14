@@ -8,64 +8,14 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-    steps:
-      - name: Checkout vcpkg
-        uses: actions/checkout@v2
-        with:
-          repository: Microsoft/vcpkg
-          path: vcpkg
-          
-      - uses: actions/cache@v1
-        id: vcpkg-cache
-        with:
-          path: vcpkg
-          key: vcpkg-${{ hashFiles('vcpkg/toolsrc/VERSION.txt') }}
-          restore-keys: |
-            vcpkg-
-
-      - run: ./bootstrap-vcpkg.bat;
-        working-directory: vcpkg
-        if: steps.vcpkg-cache.outputs.cache-hit != 'true'
-        
-      - run: ./vcpkg install curl:x86-windows curl:x64-windows
-        working-directory: vcpkg
+    steps:        
+      - run: vcpkg install curl:x86-windows curl:x64-windows
       
-      - name: Prepare libcurl build logs
-        run: >-
-          mkdir vcpkg-build-logs;
-          cp vcpkg/buildtrees/curl/*.log vcpkg-build-logs
-          
-      - name: Upload libcurl build logs
-        uses: actions/upload-artifact@v1
-        with:
-          name: vcpkg-build-logs
-          path: vcpkg-build-logs
-        
       - uses: actions/checkout@v2
-        with:
-          path: NCurly
           
       - name: Copy libcurl dlls
         run: >-
           @('x86', 'x64') | foreach {
-            mkdir "NCurly/runtimes/win-$_/native";
-            cp "vcpkg/installed/$_-windows/bin/*.dll" "NCurly/runtimes/win-$_/native"
+            mkdir "runtimes/win-$_/native";
+            cp "$Env:VCPKG_ROOT/installed/$_-windows/bin/*.dll" "runtimes/win-$_/native"
           }
-          
-      - name: vcpkg > Prepare for caching
-        if: steps.vcpkg-cache.outputs.cache-hit != 'true'
-        working-directory: vcpkg
-        run: rm * -Exclude '.vcpkg-root','vcpkg.exe','toolsrc/VERSION.txt' -Recurse          
-        
-      #- name: Export curl
-      #  working-directory: '.\vcpkg'
-      #  run: '.\vcpkg export curl:x86-windows curl:x64-windows --nuget'
-      #  
-      #- name: Prepare artifact directory
-      #  run: 'md vcpkg-artifact; Move-Item -Path vcpkg\*.nupkg -Destination vcpkg-artifact\libcurl.1.0.0.nupkg'
-      #  
-      #- name: Upload artifact
-      #  uses: actions/upload-artifact@v1
-      #  with:
-      #    name: 'libcurl.1.0.0.nupkg'
-      #    path: '.\vcpkg-artifact'
