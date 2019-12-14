@@ -59,7 +59,7 @@ jobs:
       - name: vcpkg > Prepare for caching
         if: steps.vcpkg-cache.outputs.cache-hit != 'true'
         working-directory: vcpkg
-        run: rm * -Exclude '.vcpkg-root','vcpkg.exe' -Recurse          
+        run: rm * -Exclude '.vcpkg-root','vcpkg.exe','toolsrc/VERSION.txt' -Recurse          
         
       #- name: Export curl
       #  working-directory: '.\vcpkg'
