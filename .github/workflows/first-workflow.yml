@@ -25,11 +25,11 @@ jobs:
       - name: Bootstrap vcpkg
         if: steps.cache-vcpkg.outputs.cache-hit != 'true'
         working-directory: vcpkg
-        run: .\bootstrap-vcpkg.bat
+        run: ./bootstrap-vcpkg.bat
         
       - name: Install curl
         working-directory: vcpkg
-        run: .\vcpkg install curl:x86-windows curl:x64-windows
+        run: ./vcpkg install curl:x86-windows curl:x64-windows
         
       - name: Checkout NCurly
         uses: actions/checkout@v2
@@ -37,8 +37,8 @@ jobs:
       - name: Copy curl binaries
         run: >-
           @('x86', 'x64') | foreach {
-            mkdir "runtimes\win-$_\native";
-            cp "vcpkg\installed\curl\$_-windows\bin\*.dll" "runtimes\win-$_\native"
+            mkdir "runtimes/win-$_/native";
+            cp "vcpkg/installed/curl/$_-windows/bin/*.dll" "runtimes/win-$_/native"
           }
         
       #- name: Export curl
