@@ -1,0 +1,20 @@
+name: Test Action
+
+on:
+  push:
+    branches: [pwsh-action]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    name: 'A job to say hello'
+    steps:
+      - uses: actions/checkout@v1
+      
+      - uses: .github/actions/hello-world
+        id: hello
+        with:
+          who: 'Mona the Octocat'
+          
+      - run: echo "The time was ${{ steps.hello.outputs.time }}"
+        
